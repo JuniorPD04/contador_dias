@@ -94,8 +94,7 @@ export default function NotificationButton() {
             onClick={(e) => e.stopPropagation()}
           >
             <p className="font-body text-sm text-paper-100/90">
-              ¿Activamos los recordatorios porfi? Así te aviso del aniversario
-              mensual y del día del reencuentro.
+              Activa las notificaciones porfi.
             </p>
             <div className="mt-4 flex gap-2">
               <button
