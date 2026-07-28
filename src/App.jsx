@@ -11,6 +11,7 @@ import AnniversaryBanner from "./components/AnniversaryBanner";
 import SurpriseBanner from "./components/SurpriseBanner";
 import NotificationPrompt from "./components/NotificationPrompt";
 import InstallHint from "./components/InstallHint";
+import InstallButton from "./components/InstallButton";
 import CelebrationScreen from "./components/CelebrationScreen";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
   return (
     <div className="relative min-h-[100dvh] bg-ink-950 font-body">
       <Starfield />
+      <InstallButton />
 
       {isFinished && !celebrationDismissed && (
         <CelebrationScreen onDismiss={() => setCelebrationDismissed(true)} />

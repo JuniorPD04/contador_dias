@@ -63,8 +63,8 @@ export default function NotificationPrompt() {
   return (
     <div className="mx-auto w-full max-w-sm animate-fade-up rounded-2xl border border-paper-100/10 bg-ink-900/60 px-5 py-4" style={{ animationDelay: "280ms" }}>
       <p className="font-body text-sm text-paper-100/90">
-        Activa los avisos para no perderte el aniversario mensual y el día del
-        reencuentro.
+        Activa los recordatorios porfi, así te aviso del aniversario mensual y
+        del día del reencuentro.
       </p>
       <button
         onClick={requestPermission}
