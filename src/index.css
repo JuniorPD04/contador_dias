@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background-color: #150f26;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Figtree", sans-serif;
+}
+
+/* Recorta el "boarding pass": dos muescas circulares a los lados que
+   simulan la perforación de un ticket. Usan el mismo color que el fondo
+   de la página para dar la ilusión de un hueco. */
+.ticket {
+  overflow: visible;
+}
+.ticket::before,
+.ticket::after {
+  content: "";
+  position: absolute;
+  top: 38%;
+  width: 22px;
+  height: 22px;
+  background: #150f26;
+  border-radius: 9999px;
+}
+.ticket::before {
+  left: -11px;
+}
+.ticket::after {
+  right: -11px;
+}
+
+.ticket-divider {
+  border-top: 1px dashed rgba(247, 239, 225, 0.2);
+}
+
+/* Respeta a quienes prefieren menos movimiento en pantalla */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
