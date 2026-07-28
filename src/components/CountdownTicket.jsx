@@ -19,12 +19,12 @@ export default function CountdownTicket() {
   const { days, hours, minutes, seconds } = useCountdown(REUNION_DATE);
 
   return (
-    <div className="ticket relative mx-auto w-full max-w-sm animate-fade-up rounded-[28px] border border-dashed border-paper-100/20 bg-gradient-to-b from-ink-800 to-ink-900 px-6 pb-6 pt-7 shadow-glow">
+    <div className="ticket relative mx-auto w-full max-w-sm animate-fade-up rounded-[28px] border border-dashed border-paper-100/20 bg-gradient-to-b from-ink-800 to-ink-900 px-6 pb-5 pt-6 shadow-glow">
       <p className="text-center font-mono text-[11px] uppercase tracking-[0.3em] text-rose-400">
         faltan para verte
       </p>
 
-      <div className="mt-4 flex items-end justify-center gap-1">
+      <div className="mt-3 flex items-end justify-center gap-1">
         <span className="font-display text-7xl font-semibold tabular-nums text-paper-100 sm:text-8xl">
           {days}
         </span>
@@ -33,7 +33,7 @@ export default function CountdownTicket() {
         </span>
       </div>
 
-      <div className="ticket-divider my-5" />
+      <div className="ticket-divider my-4" />
 
       <div className="flex items-center justify-between px-2">
         <Digit value={pad2(hours)} label="hrs" />
@@ -43,7 +43,7 @@ export default function CountdownTicket() {
         <Digit value={pad2(seconds)} label="seg" />
       </div>
 
-      <div className="mt-6 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-paper-400/60">
+      <div className="mt-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-paper-400/60">
         <span>{YOUR_NAME}</span>
         <span className="text-rose-400">✈</span>
         <span>{PARTNER_NAME}</span>

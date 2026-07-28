@@ -10,7 +10,7 @@ function formatDots(dateStr) {
 
 export default function Header() {
   return (
-    <header className="flex flex-col items-center gap-2 pt-[max(1.5rem,env(safe-area-inset-top))] text-center animate-fade-up">
+    <header className="flex flex-col items-center gap-1.5 text-center animate-fade-up">
       <p className="font-mono text-[11px] uppercase tracking-[0.35em] text-paper-400">
         {YOUR_NAME} <span className="text-rose-400">✦</span> {PARTNER_NAME}
       </p>
