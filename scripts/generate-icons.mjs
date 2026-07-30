@@ -54,4 +54,16 @@ for (const t of targets) {
   console.log("✓", t.name);
 }
 
+// Ícono "badge" para notificaciones: Android SIEMPRE lo pinta como silueta
+// monocromática (usa solo el canal alfa), así que si le pasamos la foto a
+// color termina viéndose como un cuadrado blanco sólido. Por eso va aparte:
+// un corazón blanco sobre transparente, nada de foto.
+const BADGE_SVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="-4 -4 32 32">
+    <path fill="#ffffff" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+  </svg>
+`;
+await sharp(Buffer.from(BADGE_SVG)).png().toFile(path.join(OUT_DIR, "badge-96.png"));
+console.log("✓ badge-96.png");
+
 console.log("\nÍconos generados en public/icons/");

@@ -25,7 +25,7 @@ export default async function handler(req, res) {
   }
 
   const payload = JSON.stringify({
-    title: "Revisa la frase, mi amor",
+    title: "Revisa la app, mi amor",
     body: "Te envío esta notificación por si no has revisado la app amor, muak ❤️🦦",
   });
 
