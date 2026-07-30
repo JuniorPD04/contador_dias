@@ -26,3 +26,9 @@ export const SEPARATION_START = "2026-07-15T00:00:00";
 // ("pronto nos veremos, amor ✈️"). Antes de esta fecha no se muestra
 // absolutamente ninguna pista en la app.
 export const SURPRISE_REVEAL_DATE = "2026-11-30T00:00:00";
+
+// 🔔 Llave pública VAPID para el push real (avisa aunque la app esté
+// cerrada). Es pública por diseño, no es secreta — la privada vive solo en
+// las variables de entorno de Vercel (api/send-daily-push.js).
+export const VAPID_PUBLIC_KEY =
+  "BG8_1GBVvgTV6f2qY0w_hov7eCHIlCpA0jO6pul9sE9La9OxgoBvo81ZCd_c2CkTjc2OwVhroyHkRECgn-9QiLI";

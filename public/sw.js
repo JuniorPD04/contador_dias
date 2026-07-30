@@ -1,14 +1,12 @@
-// Service Worker: soporte offline básico + recordatorios locales.
+// Service Worker: soporte offline básico + recordatorios (locales y push).
 //
-// Nota honesta sobre notificaciones en iOS:
-// Safari en iOS solo permite Web Push real (con el usuario sin tener la app
-// abierta) si la PWA fue agregada a la pantalla de inicio y el sistema es
-// iOS 16.4+, y ESO requiere un servidor propio enviando pushes firmados
-// (VAPID/APNs). Aquí NO hay servidor, así que lo que implementamos son
-// notificaciones LOCALES: se disparan cuando ella/tú abren la app y el
-// service worker ya está activo. Es justo lo que pide el requisito 5
-// ("mostrar un aviso cuando abra la app"). Si más adelante quieres push
-// real en segundo plano, necesitarás un backend pequeño.
+// Hay dos mecanismos de notificación:
+// 1. Locales (ver NotificationButton.jsx): se disparan cuando se abre la
+//    app, para avisos puntuales (aniversario, día del reencuentro, etc).
+// 2. Push real (api/send-daily-push.js + evento "push" acá abajo): llega
+//    aunque la app esté cerrada, vía Web Push con VAPID. En iOS solo
+//    funciona si la PWA fue agregada a la pantalla de inicio y el sistema
+//    es 16.4+.
 
 const CACHE_NAME = "contador-dias-v1";
 const APP_SHELL = ["/", "/index.html", "/manifest.json"];
@@ -66,7 +64,28 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// Al tocar una notificación local, enfoca (o abre) la app.
+// Push real: llega desde el servidor (api/send-daily-push.js) aunque la app
+// esté cerrada. El payload trae { title, body }.
+self.addEventListener("push", (event) => {
+  let data = { title: "Contador de días", body: "" };
+  if (event.data) {
+    try {
+      data = event.data.json();
+    } catch {
+      data.body = event.data.text();
+    }
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-192.png",
+    })
+  );
+});
+
+// Al tocar una notificación (local o push), enfoca (o abre) la app.
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   event.waitUntil(

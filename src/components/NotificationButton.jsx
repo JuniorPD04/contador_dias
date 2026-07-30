@@ -1,8 +1,42 @@
 import { useEffect, useState } from "react";
-import { ANNIVERSARY_DAY, SURPRISE_REVEAL_DATE, REUNION_DATE } from "../config";
+import { ANNIVERSARY_DAY, SURPRISE_REVEAL_DATE, REUNION_DATE, VAPID_PUBLIC_KEY } from "../config";
 import { isStandalone } from "../hooks/pwa";
 
 const STORAGE_KEY = "notif-last-shown";
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+  const rawData = atob(base64);
+  return Uint8Array.from([...rawData].map((c) => c.charCodeAt(0)));
+}
+
+// Suscribe este navegador a push real (VAPID) y manda la suscripción al
+// backend (api/save-subscription.js) para que el cron diario (12pm) pueda
+// avisarle aunque tenga la app cerrada. Si algo falla acá (todavía no se
+// configuró VAPID_PUBLIC_KEY, por ejemplo), no rompe el resto: los avisos
+// locales de checkTodayReminders siguen funcionando igual.
+async function subscribeToPush() {
+  if (!VAPID_PUBLIC_KEY || !("PushManager" in window)) return;
+
+  try {
+    const reg = await navigator.serviceWorker.ready;
+    let subscription = await reg.pushManager.getSubscription();
+    if (!subscription) {
+      subscription = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+      });
+    }
+    await fetch("/api/save-subscription", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(subscription),
+    });
+  } catch (err) {
+    console.error("No se pudo suscribir a push:", err);
+  }
+}
 
 function todayKey() {
   return new Date().toISOString().slice(0, 10); // YYYY-MM-DD
@@ -53,6 +87,7 @@ export default function NotificationButton() {
   useEffect(() => {
     if (permission === "granted") {
       checkTodayReminders();
+      subscribeToPush();
       return;
     }
     if (isStandalone() && permission === "default") {
