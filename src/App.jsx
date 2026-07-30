@@ -11,6 +11,7 @@ import AnniversaryBanner from "./components/AnniversaryBanner";
 import SurpriseBanner from "./components/SurpriseBanner";
 import NotificationButton from "./components/NotificationButton";
 import InstallButton from "./components/InstallButton";
+import PullToRefresh from "./components/PullToRefresh";
 import CelebrationScreen from "./components/CelebrationScreen";
 
 export default function App() {
@@ -27,14 +28,16 @@ export default function App() {
         <CelebrationScreen onDismiss={() => setCelebrationDismissed(true)} />
       )}
 
-      <main className="relative z-10 mx-auto flex min-h-[100dvh] max-w-md flex-col justify-center gap-4 px-5 py-[max(1.25rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-        <Header />
-        <CountdownTicket />
-        <FlightProgress />
-        <SurpriseBanner />
-        <AnniversaryBanner />
-        <DailyPostcard />
-      </main>
+      <PullToRefresh>
+        <main className="relative z-10 mx-auto flex min-h-[100dvh] max-w-md flex-col justify-center gap-4 px-5 py-[max(1.25rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]">
+          <Header />
+          <CountdownTicket />
+          <FlightProgress />
+          <SurpriseBanner />
+          <AnniversaryBanner />
+          <DailyPostcard />
+        </main>
+      </PullToRefresh>
     </div>
   );
 }

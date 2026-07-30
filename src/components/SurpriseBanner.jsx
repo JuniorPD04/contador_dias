@@ -7,13 +7,21 @@ import { dayOfYear } from "../hooks/dateUtils";
 // nada — ninguna pista visible. A partir de esa fecha (y hasta el
 // reencuentro) aparece el mensaje sorpresa.
 export default function SurpriseBanner() {
-  const now = Date.now();
-  const reveal = new Date(SURPRISE_REVEAL_DATE).getTime();
+  const nowDate = new Date();
+  const now = nowDate.getTime();
+  const revealDate = new Date(SURPRISE_REVEAL_DATE);
+  const reveal = revealDate.getTime();
   const reunion = new Date(REUNION_DATE).getTime();
 
   if (now < reveal || now >= reunion) return null;
 
-  const phrase = pickDeterministic(SURPRISE_PHRASES, dayOfYear(new Date()));
+  // El día exacto de SURPRISE_REVEAL_DATE es el día del vuelo: mensaje fijo,
+  // no rotativo, para que siempre diga esto sin importar cómo cambie
+  // SURPRISE_PHRASES.
+  const isFlightDay = nowDate.toDateString() === revealDate.toDateString();
+  const phrase = isFlightDay
+    ? "Hoy abordo el avión y por fin regreso. Espero poder vernos pronto, mi amor."
+    : pickDeterministic(SURPRISE_PHRASES, dayOfYear(nowDate));
 
   return (
     <div className="mx-auto w-full max-w-sm animate-fade-up rounded-2xl border border-rose-400/30 bg-gradient-to-r from-rose-500/15 to-gold-400/10 px-5 py-4 text-center shadow-glow">

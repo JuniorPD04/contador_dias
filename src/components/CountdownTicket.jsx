@@ -21,7 +21,7 @@ export default function CountdownTicket() {
   return (
     <div className="ticket relative mx-auto w-full max-w-sm animate-fade-up rounded-[28px] border border-dashed border-paper-100/20 bg-gradient-to-b from-ink-800 to-ink-900 px-6 pb-5 pt-6 shadow-glow">
       <p className="text-center font-mono text-[11px] uppercase tracking-[0.3em] text-rose-400">
-        faltan para verte
+        faltan para regresar
       </p>
 
       <div className="mt-3 flex items-end justify-center gap-1">
