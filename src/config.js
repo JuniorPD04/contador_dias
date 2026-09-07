@@ -15,7 +15,7 @@ export const ANNIVERSARY_DAY = 7;
 
 // 👉 FECHA PRINCIPAL: el día del reencuentro. Este es EL dato que muestra
 // el contador grande de la app (días, horas, minutos, segundos).
-export const REUNION_DATE = "2026-12-07T00:00:00";
+export const REUNION_DATE = "2026-12-01T00:00:00";
 
 // Fecha desde la que se mide la barra/arco de progreso, es decir, el punto
 // que cuenta como "0% del camino". Es el día que empezó esta etapa de

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ANNIVERSARY_DAY, SURPRISE_REVEAL_DATE, REUNION_DATE, VAPID_PUBLIC_KEY } from "../config";
+import { REUNION_DAY_MESSAGE } from "../data/messages";
 import { isStandalone } from "../hooks/pwa";
 
 const STORAGE_KEY = "notif-last-shown";
@@ -64,7 +65,7 @@ function checkTodayReminders() {
   const reunion = new Date(REUNION_DATE);
 
   if (now.toDateString() === reunion.toDateString()) {
-    showLocalNotification("¡Hoy es el día! 🎉", "Por fin se reencuentran.");
+    showLocalNotification("¡Hoy es el día! 🎉", REUNION_DAY_MESSAGE);
   } else if (now.toDateString() === reveal.toDateString()) {
     showLocalNotification("✈️ Pronto nos veremos, amor", "Ya empezó la recta final.");
   } else if (now.getDate() === ANNIVERSARY_DAY) {

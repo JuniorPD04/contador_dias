@@ -162,6 +162,10 @@ export const SURPRISE_PHRASES = [
   "A partir de hoy los días van a volar, ¡ya casi te veo!"
 ];
 
+// Frase fija para el día exacto del reencuentro. No entra en la rotación
+// diaria, así que no cambia el mensaje de hoy ni los demás mensajes.
+export const REUNION_DAY_MESSAGE = "Hoy es el día y sé que la espera valió la pena.";
+
 // Elige un elemento de forma determinística según un índice (mismo índice =
 // misma frase siempre, así el mensaje del día no cambia si recargas la app).
 export function pickDeterministic(list, index) {

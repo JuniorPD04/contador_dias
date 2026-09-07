@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
 import { YOUR_NAME, PARTNER_NAME } from "../config";
+import { REUNION_DAY_MESSAGE } from "../data/messages";
 
 const PALETTE = ["#E14F8A", "#F2C14E", "#45B7AC", "#F7EFE1"];
 
@@ -35,8 +36,7 @@ export default function CelebrationScreen({ onDismiss }) {
         Por fin juntos 🎉
       </h1>
       <p className="max-w-xs font-body text-paper-300">
-        Se acabó la cuenta regresiva. Todo lo que queda ahora es abrazarte
-        sin apuro.
+        {REUNION_DAY_MESSAGE}
       </p>
       <button
         onClick={() => {
